@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+<title></title>
+<script	src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
+<script	src="js/html-snippet-1.0.0.js"></script>
+<script type="text/javascript">
+	$(function(){
+		//load all data
+		htmlSnippet.init();
+		
+		var content = "";
+		for(var i=1;i<=5;i++){
+			content+=htmlMaker().tag("li").content("Item"+i).show();
+		}
+		$('#list').html(content);
+		
+		var tableLine = htmlSnippet.getSnippet('snippet-tr');
+			var tableCol = htmlSnippet.getSnippet('snippet-td');
+		var content2 = "";
+		for(var i=1;i<=3;i++){
+			content2 += tableCol.content("Item"+i).show();
+		}
+		
+		 tableLine.content(content2);
+		
+		$("#table>tbody").html(tableLine.show());
+		
+		$('#updateFooter').click(function(){
+			htmlSnippet.getSnippet('snippet-footer').content("Footer Edited");
+			htmlSnippet.init();
+		});
+		$('#revertFooter').click(function(){
+			htmlSnippet.getSnippet('snippet-footer').content("Footer");
+			htmlSnippet.init();
+		});
+	});
+
+</script>
+</head>
+<body>
+<div class="html-from-snippet" snippet="snippet-header"></div>
+<div>
+	<ul id="list"></ul>
+</div>
+
+<div>
+	<table id="table" style="border:1px solid">
+		<thead>
+			<tr>
+			<th>header</th>
+			<th>header</th>
+			<th>header</th>
+			</tr>
+		</thead>
+		<tbody>
+			
+		</tbody>
+	</table>
+
+</div>
+<div>
+<button id="updateFooter">Update Footer</button>
+<button id="revertFooter">Revert Footer</button>
+</div>
+<div class="html-from-snippet" snippet="snippet-footer"></div>
+</body>
+</html>
